@@ -34,10 +34,6 @@ export const ENEMY_HIT = 'app/HomePage/ENEMY_HIT';
 export const PLAYER_DIED = 'app/HomePage/PLAYER_DIED';
 export const RESET_GAME = 'app/HomePage/RESET_GAME';
 
-export const UP = 87;
-export const DOWN = 83;
-export const LEFT = 65;
-export const RIGHT = 68;
 export const ATTACK = 81;
 export const BLOCK = 87;
 export const SPACE = 32;

@@ -41,11 +41,25 @@ class Canvas extends React.PureComponent { // eslint-disable-line react/prefer-s
   }
 
   handleMouseMove(e) {
+    e.preventDefault();
     if (this.props.mouseHeld) {
       const mouseY = e.clientY - this.canvas.offsetTop;
       const mouseX = e.clientX - this.canvas.offsetLeft;
       this.props.mouseMove({ mouseX, mouseY });
     }
+  }
+
+  handleMouseUp() {
+    this.props.mouseUp();
+  }
+
+  handleMouseDown(e) {
+    e.preventDefault();
+    const payload = {
+      offsetX: e.nativeEvent.offsetX,
+      offsetY: e.nativeEvent.offsetY,
+    };
+    this.props.mouseDown(payload);
   }
 
   render() {
@@ -56,8 +70,8 @@ class Canvas extends React.PureComponent { // eslint-disable-line react/prefer-s
         ref={(c) => {
           this.canvas = c;
         }}
-        onMouseDown={(e) => this.props.mouseDown(e)}
-        onMouseUp={(e) => this.props.mouseUp(e)}
+        onMouseDown={(e) => this.handleMouseDown(e)}
+        onMouseUp={() => this.handleMouseUp()}
         onMouseMove={(e) => this.handleMouseMove(e)}
       />
     );

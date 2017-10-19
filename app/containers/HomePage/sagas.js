@@ -60,12 +60,12 @@ function* loadNextLevel() {
     yield put(actions.updateLevelMap(levelMap));
     yield put(actions.updateGameState({
       gameState: LEVEL,
-      interstitialText: { l1: `Floor ${currentLevel + 1}`, l2: null },
+      interstitialText: { l1: `Floor ${currentLevel + 1}`, l2: null, l3: null, l4: null, l5: null },
     }));
     yield delay(3000);
     yield put(actions.updateGameState({
       gameState: PLAY,
-      interstitialText: { l1: null, l2: null },
+      interstitialText: { l1: null, l2: null, l3: null, l4: null, l5: null },
     }));
   }
 }
@@ -73,23 +73,22 @@ function* loadNextLevel() {
 function* playerDied() {
   yield put(actions.updateGameState({
     gameState: GAME_OVER,
-    interstitialText: { l1: 'Game Over', l2: 'You Died!' },
+    interstitialText: { l1: 'Game Over', l2: 'You Died!', l3: null, l4: null, l5: null },
   }));
-  yield delay(5000);
+  yield put(actions.resetGame());
   yield put(actions.updateGameState({
     gameState: INTRO,
     interstitialText: { l1: 'Rogue', l2: 'Press Space To Start', l3: 'Move: Left Mouse', l4: 'Attack: Q', l5: 'Stun: W' },
   }));
-  yield put(actions.resetGame());
 }
 
 function* gameWon() {
   yield put(actions.updateGameState({
     gameState: GAME_WON,
-    interstitialText: { l1: 'Congratulations!', l2: 'Game Completed' },
+    interstitialText: { l1: 'Congratulations!', l2: 'Game Completed', l3: null, l4: null, l5: null },
   }));
-  yield delay(10000);
   yield put(actions.resetGame());
+  yield delay(10000);
   yield put(actions.updateGameState({
     gameState: INTRO,
     interstitialText: { l1: 'Rogue', l2: 'Press Space To Start', l3: 'Move: Left Mouse', l4: 'Attack: Q', l5: 'Stun: W' },

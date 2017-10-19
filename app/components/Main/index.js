@@ -6,12 +6,7 @@
 
 import React from 'react';
 import {
-  INTRO,
   PLAY,
-  PAUSE,
-  LEVEL,
-  GAME_OVER,
-  GAME_WON,
 } from 'containers/HomePage/constants';
 import Interstitial from '../Interstitial';
 import StatusBar from '../StatusBar';

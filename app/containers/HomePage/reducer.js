@@ -98,19 +98,13 @@ function homePageReducer(state = initialState, action) {
       }
       const gameState = state.get('gameState');
       if (gameState === INTRO) {
-        return state.merge({ gameState: LEVEL, interstitialText: { l1: null, l2: 'null' } });
+        return state.merge({ gameState: LEVEL, interstitialText: { l1: null, l2: null, l3: null, l4: null, l5: null } });
       }
       if (gameState === PLAY) {
-        return state.merge({ gameState: PAUSE, interstitialText: { l1: 'Paused', l2: 'Press space to resume' } });
+        return state.merge({ gameState: PAUSE, interstitialText: { l1: 'Paused', l2: 'Press space to resume', l3: null, l4: null, l5: null } });
       }
       if (gameState === PAUSE) {
-        return state.merge({ gameState: PLAY, interstitialText: { l1: null, l2: null } });
-      }
-      if (gameState === GAME_OVER) {
-        return state.merge({ gameState: INTRO, interstitialText: { l1: 'You died', l2: 'Press space to resume' } });
-      }
-      if (gameState === GAME_WON) {
-        return state.merge({ gameState: INTRO, interstitialText: { l1: 'Congratulations, game complete!', l2: 'Press space to continue' } });
+        return state.merge({ gameState: PLAY, interstitialText: { l1: null, l2: null, l3: null, l4: null, l5: null } });
       }
       return state;
     }
@@ -120,16 +114,16 @@ function homePageReducer(state = initialState, action) {
       return state.set('levelMap', levelMap);
     }
     case MOUSE_DOWN: {
-      action.payload.preventDefault();
       const levelMap = state.get('levelMap');
       const mouseHeld = true;
-      levelMap.player.setMoveTo(action.payload.nativeEvent.offsetX, action.payload.nativeEvent.offsetY);
+      levelMap.player.setMoveTo(action.payload.offsetX, action.payload.offsetY);
       return state.merge({ levelMap, mouseHeld });
     }
     case MOUSE_UP: {
       return state.set('mouseHeld', false);
     }
     case RESET_GAME: {
+      console.log('resetting');
       return state.merge({
         nextUpdate: 0,
         currentLevel: 0,
