@@ -75,6 +75,7 @@ function* playerDied() {
     gameState: GAME_OVER,
     interstitialText: { l1: 'Game Over', l2: 'You Died!', l3: null, l4: null, l5: null },
   }));
+  yield delay(5000);
   yield put(actions.resetGame());
   yield put(actions.updateGameState({
     gameState: INTRO,
